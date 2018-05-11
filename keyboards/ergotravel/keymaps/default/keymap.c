@@ -1,6 +1,4 @@
-﻿#include "ergotravel.h"
-#include "action_layer.h"
-#include "eeconfig.h"
+﻿#include QMK_KEYBOARD_H
 
 extern keymap_config_t keymap_config;
 
@@ -36,7 +34,7 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  [_QWERTY] = KC_KEYMAP(
+  [_QWERTY] = LAYOUT_kc(
   //,----+----+----+----+----+----+----.     ,----+----+----+----+----+----+----.
      ESC , Q  , W  , E  , R  , T  ,LBRC,      RBRC, Y  , U  , I  , O  , P  ,BSPC,
   //|----+----+----+----+----+----+----|     |----+----+----+----+----+----+----|
@@ -48,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //`----+----+----+--+-+----/----/               \----\----+----+----+----+----'
   ),
 
-  [_LOWER] = KC_KEYMAP(
+  [_LOWER] = LAYOUT_kc(
     //,----+----+----+----+----+----+----.     ,----+----+----+----+----+----+----.
       GRAVE, 1  , 2  , 3  , 4  , 5  , A,           B,  6  , 7  , 8  , 9  , 0  ,DEL,
     //|----+----+----+----+----+----+----|     |----+----+----+----+----+----+----|
@@ -60,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //`----+----+----+--+-+----/----/               \----\----+----+----+----+----'
   ),
 
-  [_RAISE] = KC_KEYMAP(
+  [_RAISE] = LAYOUT_kc(
     //,----+----+----+----+----+----+----.     ,----+----+----+----+----+----+----.
        ESC , 1  , 2  , 3  , 4  , 5  , A,          B,  6  , 7  , 8  , 9  , 0  ,BSPC,
     //|----+----+----+----+----+----+----|     |----+----+----+----+----+----+----|
@@ -72,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //`----+----+----+--+-+----/----/               \----\----+----+----+----+----'
   ),
 
-  [_ADJUST] = KC_KEYMAP(
+  [_ADJUST] = LAYOUT_kc(
     //,----+----+----+----+----+----+----.     ,----+----+----+----+----+----+----.
        ESC , F1 , F2 , F3 , F4 , F5 , F6,         F7,  F8, F9 ,F10 , F11, F12,BSPC,
     //|----+----+----+----+----+----+----|     |----+----+----+----+----+----+----|
@@ -88,14 +86,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
    
 
-#ifdef AUDIO_ENABLE
-float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
-#endif
 
-void persistent_default_layer_set(uint16_t default_layer) {
-  eeconfig_update_default_layer(default_layer);
-  default_layer_set(default_layer);
-}
+
+
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -104,7 +97,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         #ifdef AUDIO_ENABLE
           PLAY_SONG(tone_qwerty);
         #endif
-        persistent_default_layer_set(1UL<<_QWERTY);
+        set_single_persistent_default_layer(_QWERTY);
       }
       return false;
       break;

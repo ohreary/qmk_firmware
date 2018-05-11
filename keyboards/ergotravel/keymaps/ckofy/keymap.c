@@ -1,6 +1,4 @@
-﻿#include "ergotravel.h"
-#include "action_layer.h"
-#include "eeconfig.h"
+﻿#include QMK_KEYBOARD_H
 
 extern keymap_config_t keymap_config;
 
@@ -70,7 +68,7 @@ enum {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Colemak Mod-DH is used. https://colemakmods.github.io/mod-dh/
-  [_COLEMAK] = KC_KEYMAP(
+  [_COLEMAK] = LAYOUT_kc(
   //,----+----+----+----+----+----+----.     ,----+----+----+----+----+----+----.
      TAB , Q  , W  , F  , P  , B  ,LPRN,      RPRN, J  , L  , U  , Y  ,SCLN,BSPC,
   //|----+----+----+----+----+----+----|     |----+----+----+----+----+----+----|
@@ -82,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //`----+----+----+--+-+----/----/               \----\----+----+----+----+----'
   ),
 
-  [_QWERTY] = KC_KEYMAP(
+  [_QWERTY] = LAYOUT_kc(
   //,----+----+----+----+----+----+----.     ,----+----+----+----+----+----+----.
      ESC , Q  , W  , E  , R  , T  ,LBRC,      RBRC, Y  , U  , I  , O  , P  ,BSPC,
   //|----+----+----+----+----+----+----|     |----+----+----+----+----+----+----|
@@ -94,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //`----+----+----+--+-+----/----/               \----\----+----+----+----+----'
   ),
 
-  [_NUMPAD] = KC_KEYMAP(
+  [_NUMPAD] = LAYOUT_kc(
     //,----+----+----+----+----+----+----.     ,----+----+----+----+----+----+----.
            ,    ,    ,    ,    ,    ,    ,          ,ASTR, P7 , P8 , P9 ,SLSH,    ,
     //|----+----+----+----+----+----+----|     |----+----+----+----+----+----+----|
@@ -106,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //`----+----+----+--+-+----/----/               \----\----+----+----+----+----'
   ),
 
-  [_LOWER] = KC_KEYMAP(
+  [_LOWER] = LAYOUT_kc(
   //,----+----+----+----+----+----+----.     ,----+----+----+----+----+----+----.
          ,XXXX,XXXX,XXXX,XXXX,CAPS,    ,          ,PGUP,HOME, UP ,END ,DEL ,    ,
   //|----+----+----+----+----+----+----|     |----+----+----+----+----+----+----|
@@ -118,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //`----+----+----+--+-+----/----/               \----\----+----+----+----+----'
   ),
 
-  [_RAISE] = KC_KEYMAP(
+  [_RAISE] = LAYOUT_kc(
     //,----+----+----+----+----+----+----.     ,----+----+----+----+----+----+----.
            ,AMPR,PERC,HASH,EXLM,LPRN,    ,          ,ASTR,RPRN, AT ,DLR ,CIRC,BSPC,
     //|----+----+----+----+----+----+----|     |----+----+----+----+----+----+----|
@@ -131,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
 
-  [_ADJUST] = KC_KEYMAP(
+  [_ADJUST] = LAYOUT_kc(
     //,----+----+----+----+----+----+----.     ,----+----+----+----+----+----+----.
            , F1 , F2 , F3 , F4 , F5 , F6,         F7,  F8, F9 ,F10 , F11, F12,BSPC,
     //|----+----+----+----+----+----+----|     |----+----+----+----+----+----+----|
@@ -154,21 +152,14 @@ const uint16_t PROGMEM fn_actions[] = {
 // ,[F_RAISE] = ACTION_LAYER_TAP_TOGGLE(RAISE)                // FN2 - Momentary Layer 2 (Raise)
 };   
 
-#ifdef AUDIO_ENABLE
-float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
-#endif
 
-void persistent_default_layer_set(uint16_t default_layer) {
-  eeconfig_update_default_layer(default_layer);
-  default_layer_set(default_layer);
-}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case COLEMAK:
       if (record->event.pressed) {
         set_single_persistent_default_layer(_COLEMAK);
-   //     persistent_default_layer_set(1UL<<_COLEMAK);
+
       }
       return false;
       break;

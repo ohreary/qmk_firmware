@@ -1,6 +1,4 @@
-﻿#include "ergotravel.h"
-#include "action_layer.h"
-#include "eeconfig.h"
+﻿#include QMK_KEYBOARD_H
 
 extern keymap_config_t keymap_config;
 
@@ -36,7 +34,7 @@ enum custom_layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  [_COLEMAK] = KEYMAP(
+  [_COLEMAK] = LAYOUT(
     //,------+-------+-------+-------+-------+-------+-------.     ,-------+-------+-------+-------+-------+-------+-------.
       KC_ESC ,  KC_Q ,  KC_W ,  KC_F ,  KC_P ,  KC_G ,KC_LCBR,      KC_RCBR,  KC_J  ,  KC_L ,  KC_U ,  KC_Y ,KC_SCLN,KC_BSPC,
     //,------+-------+-------+-------+-------+-------+-------.     ,-------+-------+-------+-------+-------+-------+-------.
@@ -48,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //,------+-------+-------+-------+-------/-------/                     \-------\-------+-------+-------+-------+-------'
   ),
 
-  [_ADJUST] = KEYMAP(
+  [_ADJUST] = LAYOUT(
     //,------+-------+-------+-------+-------+-------+-------.     ,-------+-------+-------+-------+-------+-------+-------.
       BASELYR,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX, RESET ,
     //,------+-------+-------+-------+-------+-------+-------.     ,-------+-------+-------+-------+-------+-------+-------.
@@ -60,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //`------+-------+-------+-------+-------/-------/                      \------\-------+-------+-------+-------+-------'
   ),
 
-  [_RAISE] = KEYMAP(
+  [_RAISE] = LAYOUT(
     //,------+-------+-------+-------+-------+-------+-------.     ,-------+-------+-------+-------+-------+-------+-------.
       BASELYR,KC_EXLM, KC_AT, KC_HASH, KC_DLR,KC_LCBR,XXXXXXX,      XXXXXXX, KC_RCBR, TLHALF,  CENTER,  TRHALF, XXXXXXX, KC_BSPC,
     //,------+-------+-------+-------+-------+-------+-------.     ,-------+-------+-------+-------+-------+-------+-------.
@@ -72,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //`-------+-------+-------+-------+-------/-------/                     \------\-------+-------+-------+-------+-------'
   ),
 
-  [_LOWER] = KEYMAP(
+  [_LOWER] = LAYOUT(
     //,------+-------+-------+-------+-------+-------+-------.     ,-------+-------+-------+-------+-------+-------+-------.
       BASELYR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LCBR,XXXXXXX,      XXXXXXX, KC_RCBR, KC_7,  KC_8, KC_9,   KC_MINS,  KC_BSPC,
     //,------+-------+-------+-------+-------+-------+-------.     ,-------+-------+-------+-------+-------+-------+-------.
